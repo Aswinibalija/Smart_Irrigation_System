@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{{ section }}</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(to right, #1f4037, #99f2c8);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #fff;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(8px);
+      border-radius: 1rem;
+      padding: 2rem;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    }
+
+    h2 {
+      font-weight: bold;
+      color: #d4ffea;
+    }
+
+    table {
+      background: #fff;
+      color: #333;
+      border-radius: 0.5rem;
+      overflow: hidden;
+    }
+
+    .table thead {
+      background: #26a69a;
+      color: white;
+    }
+
+    .summary-box {
+      background: #004d40;
+      color: #e0f2f1;
+      border-radius: 0.75rem;
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+    }
+
+    .btn-back {
+      background: linear-gradient(to right, #43cea2, #185a9d);
+      border: none;
+      padding: 0.6rem 1.5rem;
+      color: white;
+      font-weight: bold;
+      border-radius: 0.5rem;
+      transition: all 0.3s ease;
+    }
+
+    .btn-back:hover {
+      transform: translateY(-2px);
+      opacity: 0.9;
+    }
+  </style>
+</head>
+
+<body class="py-5">
+  <div class="container">
+    <h2 class="text-center mb-4">📊 {{ section }}</h2>
+
+    <!-- Summary Section -->
+    <div class="row text-center mb-4">
+      <div class="col-md-4 summary-box">
+        <h5>🌡️ Avg Temp</h5>
+        <p><strong>{{ avg_temp|default:"--" }}°C</strong></p>
+      </div>
+      <div class="col-md-4 summary-box">
+        <h5>💧 Avg Moisture</h5>
+        <p><strong>{{ avg_moisture|default:"--" }}%</strong></p>
+      </div>
+      <div class="col-md-4 summary-box">
+        <h5>💨 Avg Humidity</h5>
+        <p><strong>{{ avg_humidity|default:"--" }}%</strong></p>
+      </div>
+    </div>
+
+    <!-- Table Section -->
+    <div class="table-responsive">
+      <table class="table table-striped table-bordered">
+        <thead>
+          <tr>
+            <th>📅 Timestamp</th>
+            <th>💧 Moisture (%)</th>
+            <th>🌡️ Temperature (°C)</th>
+            <th>💨 Humidity (%)</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for record in records %}
+          <tr>
+            <td>{{ record.timestamp|date:"M d, Y H:i:s" }}</td>
+            <td>{{ record.moisture }}</td>
+            <td>{{ record.temperature }}</td>
+            <td>{{ record.humidity|default:"--" }}</td>
+          </tr>
+          {% empty %}
+          <tr>
+            <td colspan="4" class="text-center text-muted">No historical data available.</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Back Button -->
+    <div class="text-center mt-4">
+      <a href="/" class="btn btn-back">⬅️ Back to Dashboard</a>
+    </div>
+  </div>
+</body>
+</html>

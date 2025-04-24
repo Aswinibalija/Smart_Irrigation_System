@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{{ section }}</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <style>
+    body {
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      color: #f0f8ff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .container {
+      background-color: rgba(255, 255, 255, 0.05);
+      padding: 2rem;
+      border-radius: 1rem;
+      backdrop-filter: blur(6px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    }
+
+    h2 {
+      color: #90ee90;
+      font-weight: bold;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-icon {
+      font-size: 1.5rem;
+      margin-right: 0.5rem;
+    }
+
+    .highlight {
+      color: #ffd700;
+      font-weight: 600;
+    }
+
+    .btn-custom {
+      background: linear-gradient(to right, #1d976c, #93f9b9);
+      color: #000;
+      font-weight: bold;
+      border: none;
+      padding: 0.5rem 1.5rem;
+      border-radius: 0.5rem;
+      transition: transform 0.2s ease;
+    }
+
+    .btn-custom:hover {
+      transform: scale(1.05);
+      opacity: 0.9;
+    }
+  </style>
+</head>
+<body class="py-5">
+  <div class="container">
+    <h2 class="text-center">🌾 {{ section }}</h2>
+
+    <p><span class="section-icon">🧠</span>This project is a <span class="highlight">Smart Irrigation System</span> that uses real-time sensor data (moisture, temperature, and humidity) to automate water delivery in fields, promoting efficient water use and sustainable agriculture.</p>
+
+    <p><span class="section-icon">🛠️</span>It is developed using <span class="highlight">Python (Django)</span> for the backend, along with <span class="highlight">HTML, CSS, JavaScript, Bootstrap</span> for the frontend. The backend is powered by a <span class="highlight">REST API</span> that feeds data dynamically into the dashboard.</p>
+
+    <p><span class="section-icon">📈</span>The system supports:
+      <ul>
+        <li>🔍 Real-time monitoring of soil and environment</li>
+        <li>🗃️ Historical data analysis</li>
+        <li>📲 Remote irrigation control (via <span class="highlight">MQTT</span>)</li>
+        <li>📤 RESTful data communication between sensors and server</li>
+      </ul>
+    </p>
+
+    <p><span class="section-icon">🚀</span>Overall, this is a great example of integrating <span class="highlight">IoT</span> with modern web development to solve real-world agricultural challenges.</p>
+
+    <div class="text-center mt-4">
+      <a href="/" class="btn btn-custom">⬅️ Back to Dashboard</a>
+    </div>
+  </div>
+</body>
+</html>

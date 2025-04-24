@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Smart Irrigation Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    body {
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #f5f5f5;
+    }
+
+    .dashboard-card {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border-radius: 1rem;
+      padding: 2rem;
+      box-shadow: 0 0 25px rgba(0, 255, 135, 0.2);
+      width: 26rem;
+    }
+
+    .dashboard-card:hover {
+      box-shadow: 0 0 35px rgba(0, 255, 135, 0.4);
+    }
+
+    .header-title {
+      font-size: 1.75rem;
+      font-weight: bold;
+      color: #00ffae;
+    }
+
+    .data-block {
+      background: rgba(255, 255, 255, 0.07);
+      padding: 1rem;
+      border-radius: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .data-label {
+      font-size: 1rem;
+      color: #b2dfdb;
+    }
+
+    .data-value {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #00e676;
+    }
+
+    .btn-advanced {
+      width: 100%;
+      font-weight: bold;
+      color: white;
+      border: none;
+      border-radius: 0.5rem;
+      padding: 0.5rem;
+      margin-top: 0.5rem;
+      transition: all 0.3s;
+    }
+
+    .btn-history {
+      background: linear-gradient(45deg, #00c853, #64dd17);
+    }
+
+    .btn-control {
+      background: linear-gradient(45deg, #0091ea, #00bcd4);
+    }
+
+    .btn-about {
+      background: linear-gradient(45deg, #8e24aa, #d500f9);
+    }
+
+    .btn-advanced:hover {
+      transform: translateY(-2px);
+      opacity: 0.9;
+    }
+
+    .timestamp {
+      font-size: 0.9rem;
+      color: #bdbdbd;
+    }
+  </style>
+</head>
+
+<body class="d-flex justify-content-center align-items-center vh-100">
+  <div class="dashboard-card text-center">
+    <div class="header-title mb-4">🌱 Smart Irrigation</div>
+
+    <div class="data-block">
+      <div class="data-label">Moisture Level</div>
+      <div class="data-value" id="moisture">--</div>
+    </div>
+
+    <div class="data-block">
+      <div class="data-label">Temperature</div>
+      <div class="data-value" id="temp">--</div>
+    </div>
+
+    <div class="data-block">
+      <div class="data-label">Humidity</div>
+      <div class="data-value" id="humidity">--</div>
+    </div>
+
+    <p class="timestamp">Last Updated: <span id="time">--</span></p>
+
+    <a href="/history/" class="btn-advanced btn-history">📊 View History</a>
+    <a href="/control/" class="btn-advanced btn-control">💧 Irrigation Control</a>
+    <a href="/about/" class="btn-advanced btn-about">ℹ️ About Project</a>
+  </div>
+
+  <script>
+    async function fetchData() {
+      try {
+        const res = await fetch('/api/sensor-data/');
+        const data = await res.json();
+        document.getElementById('moisture').innerText = data.moisture + "%";
+        document.getElementById('temp').innerText = data.temperature + "°C";
+        document.getElementById('humidity').innerText = data.humidity !== null ? data.humidity + "%" : "--";
+        document.getElementById('time').innerText = new Date(data.timestamp).toLocaleString();
+      } catch (err) {
+        console.error("Error fetching sensor data:", err);
+      }
+    }
+
+    setInterval(fetchData, 5000);
+    fetchData();
+  </script>
+</body>
+</html>
